@@ -1,0 +1,11 @@
+.profile__photo {
+  grid-column: 1;
+  grid-row: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+  background-position: center;
+  margin-right: 20px;
+}

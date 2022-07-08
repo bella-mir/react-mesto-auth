@@ -1,0 +1,16 @@
+.header__logo {
+  background-image: url("../../../images/mesto_icon.svg");
+  background-repeat: no-repeat;
+  width: 142px;
+  height: 33px;
+  margin: 45px 0 41px 0;
+}
+
+@media (max-width: 620px) {
+  .header__logo {
+    background-size: cover;
+    width: 103.74px;
+    height: 24.4px;
+    margin: 28px 0 31.6px 0;
+  }
+}

@@ -1,0 +1,21 @@
+.profile__photo-edit-button{
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0;
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 100%;
+    object-fit: cover;
+    background-color: transparent;
+    border: none;
+    transition: .5s;
+}
+  
+.profile__photo-edit-button:hover {
+    cursor: pointer;
+    background-image: url('../../../images/edit_button.svg');
+    background-color: rgba(0, 0, 0, .8);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
