@@ -27,13 +27,6 @@ In this work  I've used React to make the page interactive, registration, author
    npm start
    ```
 
-## Roadmap
-
-- [] Add validation for forms
-- [] Add loading indicators
-- [] Add confirmation popup while deleting card
-
-
 ## Stack: 
 
 * JavaScript 
