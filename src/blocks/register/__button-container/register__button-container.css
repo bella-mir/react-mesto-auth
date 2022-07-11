@@ -1,3 +1,12 @@
 .register__button-container{
     margin-top: 216px;
+    margin-bottom: 15px;
 }
+
+
+@media (max-width: 620px) {
+    .register__button-container{
+        margin-top: 173px;
+        margin-bottom: 20px;
+    }
+  }

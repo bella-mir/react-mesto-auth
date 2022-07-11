@@ -1,4 +1,30 @@
-.form__input_white{
-    border: 1px solid rgba(255, 255, 255, 1);
+.form__input_white {
+    border: none;
+    border-bottom: 2px solid rgba(204, 204, 204, 0.7);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    background-color: transparent;
     color: white;
-}
+    padding-bottom: 13px;
+  }
+  
+  .form__input_white:last-of-type{
+    margin-top: 30px;
+  }
+
+  .form__input_white:focus{
+    outline: none;
+    border-bottom: 2px solid rgba(204, 204, 204, 1);
+  }
+  
+
+  @media (max-width: 620px) {
+    .form__input_white {
+      width: 238px;
+    }
+  }
+  

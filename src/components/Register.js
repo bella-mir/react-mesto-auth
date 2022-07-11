@@ -1,45 +1,48 @@
-import React, { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Component, useState } from 'react';
 
-function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleEmailChange = useCallback(
-    (e) => {
-      setEmail(e.currentTarget.value);
-    },
-    [setEmail]
-  );
-  const handlePasswordChange = useCallback(
-    (e) => {
-      setPassword(e.currentTarget.value);
-    },
-    [setPassword]
-  );
-  
+
+function Register({handleRegister}) {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((oldData) => ({ ...oldData, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let {email, password} =  data;
+    handleRegister(email, password);
+  };
+
+
+
   return (
     <div className="register">
       <h2 className="register__title">Регистрация</h2>
-      <form className="form form__register">
+      <form className="form form__register" onSubmit={handleSubmit}>
         <input
-          className="form__input form__input_white"
+          className="form__input_white"
           id="email"
           name="email"
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          value={data.email}
+          onChange={handleChange}
         />
         <span className="form__error" id="email-error"></span>
         <input
-          className="form__input form__input_white "
+          className="form__input_white "
           id="password"
           name="password"
           type="password"
           placeholder="Пароль"
-          value={password}
-          onChange={handlePasswordChange}
+          value={data.password}
+          onChange={handleChange}
         />
         <span className="form__error" id="password-error"></span>
         <div className="register__button-container">
@@ -48,8 +51,8 @@ function Register() {
           </button>
         </div>
       </form>
-      <div className="register__signin">
-        <p>Уже зарегестрированы?</p>
+      <div>
+        <p className="register__signin">Уже зарегестрированы? Войти</p>
         {/* <Link to="login" className="register__login-link">
           Войти
         </Link> */}

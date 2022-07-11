@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 function Header(props) {
   return (
     <header className="header">
@@ -5,7 +7,7 @@ function Header(props) {
       <div>
         {props.isloggedIn ? (
           <div className="header__menu">
-            <div> Email</div> <div>Выйти</div>
+            <div> Email</div> <button onClick={props.handleLogout}>Выйти</button>
           </div>
         ) : (
           <div className="header__menu">Войти</div>

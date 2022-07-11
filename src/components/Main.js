@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import ImagePopup from "./ImagePopup";
 import Card from "./Card";
 import EditProfilePopup from "./EditProfilePopup";

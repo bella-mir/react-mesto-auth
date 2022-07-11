@@ -6,3 +6,11 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media (max-width: 620px) {
+  .header__menu {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 27px;
+  }
+}

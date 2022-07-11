@@ -1,48 +1,50 @@
-import React, { useCallback, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { Component, useState } from 'react';
+import { Link } from "react-router-dom";
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function Login({handleLogin}) {
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleEmailChange = useCallback(
-    (e) => {
-      setEmail(e.currentTarget.value);
-    },
-    [setEmail]
-  );
-  const handlePasswordChange = useCallback(
-    (e) => {
-      setPassword(e.currentTarget.value);
-    },
-    [setPassword]
-  );
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((oldData) => ({ ...oldData, [name]: value }));
+  };
 
-  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let {email, password} =  data;
+    handleLogin(email, password)
 
-
+  };
+  
   return (
     <div className="register">
-      <h2>Вход</h2>
-      <form className="register__form">
+      <h2 className="register__title">Вход</h2>
+      <form className="form form__register" onSubmit={handleSubmit}>
         <input
+          className="form__input form__input_white"
           id="email"
           name="email"
           type="email"
           placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          value={data.email}
+          onChange={handleChange}
         />
+        <span className="form__error" id="email-error"></span>
         <input
+          className="form__input form__input_white "
           id="password"
           name="password"
           type="password"
           placeholder="Пароль"
-          value={password}
-          onChange={handlePasswordChange}
+          value={data.password}
+          onChange={handleChange}
         />
+        <span className="form__error" id="password-error"></span>
         <div className="register__button-container">
-          <button type="submit" className="register__link">
+          <button type="submit" className="form__submit form__submit_white">
             Войти
           </button>
         </div>
