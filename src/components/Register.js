@@ -1,8 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-
-
-function Register({handleRegister}) {
+function Register({ handleRegister }) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -15,11 +14,9 @@ function Register({handleRegister}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let {email, password} =  data;
+    let { email, password } = data;
     handleRegister(email, password);
   };
-
-
 
   return (
     <div className="register">
@@ -53,9 +50,9 @@ function Register({handleRegister}) {
       </form>
       <div>
         <p className="register__signin">Уже зарегестрированы? Войти</p>
-        {/* <Link to="login" className="register__login-link">
+        <Link to="/login" className="register__login-link">
           Войти
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

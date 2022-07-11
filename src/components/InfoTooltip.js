@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import ok from "../images/ok.svg"
-import decline from "../images/decline.svg"
+import React from "react";
+import ok from "../images/ok.svg";
+import decline from "../images/decline.svg";
 
 function InfoTooltip({ isCorrect, onClose, isOpen }) {
   return (
-    <section
-      className={"popup" + (isOpen ? " popup_opened" : "")}
-    >
+    <section className={"popup" + (isOpen ? " popup_opened" : "")}>
       <div className="popup__container">
         <img
           src={isCorrect ? ok : decline}

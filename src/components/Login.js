@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 function Login({handleLogin}) {
@@ -24,7 +24,7 @@ function Login({handleLogin}) {
       <h2 className="register__title">Вход</h2>
       <form className="form form__register" onSubmit={handleSubmit}>
         <input
-          className="form__input form__input_white"
+          className="form__input_white"
           id="email"
           name="email"
           type="email"
@@ -34,7 +34,7 @@ function Login({handleLogin}) {
         />
         <span className="form__error" id="email-error"></span>
         <input
-          className="form__input form__input_white "
+          className="form__input_white "
           id="password"
           name="password"
           type="password"
@@ -49,6 +49,9 @@ function Login({handleLogin}) {
           </button>
         </div>
       </form>
+      <Link to="/sign-up" className="register__login-link">
+          Зарегестрироваться
+        </Link>
     </div>
   );
 }
