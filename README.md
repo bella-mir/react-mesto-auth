@@ -7,6 +7,8 @@
 
 The project is based on frontend part of [Mesto-React project](https://github.com/belka-mironova/mesto-react)
 
+[Github Pages](https://belka-mironova.github.io/react-mesto-auth/)
+
 **Description**
 
 "Mesto" is an interactive page where users can share their photos. Users have to register and sign in to be able to edit their profile, like cards and delete photos if they changed their mind :)
