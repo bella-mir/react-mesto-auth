@@ -20,7 +20,7 @@ function Header(props) {
             </button>
           </div>
         ) : windowPath === "/sign-up" ? (
-          <Link to="/login" className="header__link">
+          <Link to="/sign-in" className="header__link">
             Войти
           </Link>
         ) : (

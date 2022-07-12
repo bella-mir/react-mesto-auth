@@ -49,7 +49,7 @@ function Register({ handleRegister }) {
         </div>
       </form>
       <div>
-        <Link to="/login" className="register__signin">
+        <Link to="/sign-in" className="register__signin">
           Уже зарегестрированы? Войти
         </Link>
       </div>

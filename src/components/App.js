@@ -90,7 +90,7 @@ function App() {
       .register(password, email)
       .then((data) => {
         setRegisterInfo(true);
-        navigate("/login");
+        navigate("/sign-in");
       })
       .catch((err) => {
         setRegisterInfo(false);
@@ -105,7 +105,7 @@ function App() {
     localStorage.removeItem("jwt");
     setEmail("");
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/sign-in");
   };
 
   function handleCardLike(card) {
@@ -239,13 +239,13 @@ function App() {
               element={<Register handleRegister={handleRegister} />}
             />
             <Route
-              path="/login"
+              path="/sign-in"
               element={<Login handleLogin={handleLogin} />}
             />
             <Route
               path="*"
               element={
-                isLoggedIn ? <Navigate to="/" /> : <Navigate to="/login" />
+                isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
               }
             />
           </Routes>
