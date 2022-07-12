@@ -1,0 +1,12 @@
+.header__link{
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none
+}
+
+
+.header__link:hover{
+    opacity: 0.8;
+    cursor: pointer;
+  }

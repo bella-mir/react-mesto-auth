@@ -25,26 +25,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isRegisterSuccess, setRegisterInfo] = useState(false);
   const [registerInfo, openRegisterInfo] = useState(false);
-  const [userData, setUserData] = useState({
-    email: "",
-  });
-  const tokenCheck = () => {
-    let jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth
-        .checkToken(jwt)
-        .then((data) => {
-          if (data.email) {
-            localStorage.setItem("jwt", data.jwt);
-            setUserData({ email: data.user.email });
-            navigate("/");
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  };
+  const [email, setEmail] = useState("");
+
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -54,49 +36,6 @@ function App() {
       navigate("/");
     }
   }, [isLoggedIn]);
-
-  const handleLogin = (email, password) => {
-    auth
-      .authorize(email, password)
-      .then((data) => {
-        if (data.jwt) {
-          localStorage.setItem("jwt", data.jwt);
-          setUserData({ email: data.user.email });
-          setIsLoggedIn(() => true);
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const handleRegister = (email, password) => {
-    auth
-      .register(password, email)
-      .then((data) => {
-        if (data.jwt) {
-          localStorage.setItem("jwt", data.jwt);
-          setUserData({ email: data.user.email });
-          setRegisterInfo(() => true);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setRegisterInfo(false);
-      })
-      .finally(() => {
-        openRegisterInfo(true);
-      });
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("jwt");
-    setUserData({
-      email: "",
-    });
-    setIsLoggedIn(false);
-  };
 
   useEffect(() => {
     api
@@ -113,6 +52,61 @@ function App() {
       })
       .catch((err) => console.error(err));
   }, []);
+
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth
+        .checkToken(jwt)
+        .then((data) => {
+          if (data) {
+            setIsLoggedIn(true);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
+  const handleLogin = (email, password) => {
+    auth
+      .authorize(email, password)
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+        }
+        setEmail(email);
+        setIsLoggedIn(true);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const handleRegister = (email, password) => {
+    auth
+      .register(password, email)
+      .then((data) => {
+        setRegisterInfo(true);
+        navigate("/login");
+      })
+      .catch((err) => {
+        setRegisterInfo(false);
+        console.error(err);
+      })
+      .finally(() => {
+        openRegisterInfo(true);
+      });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setEmail("");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -208,29 +202,33 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <body className="root">
         <div className="page">
-          <Header isloggedIn={isLoggedIn} handleLogout={handleLogout} />
+          <Header
+            isloggedIn={isLoggedIn}
+            handleLogout={handleLogout}
+            email={email}
+          />
 
           <Routes>
             <Route
               path="/"
               element={
-                <ProtectedRoute loggedIn={isLoggedIn}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditAvatar={handleEditAvatarClick}
-                isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-                isAddPlacePopupOpen={isAddPlacePopupOpen}
-                isEditProfilePopupOpen={isEditProfilePopupOpen}
-                onCloseAll={closeAllPopups}
-                onCardClick={handleCardClick}
-                selectedCard={selectedCard}
-                handleUpdateUser={handleUpdateUser}
-                handleUpdateAvatar={handleUpdateAvatar}
-                handleCardLike={handleCardLike}
-                handleCardDelete={handleCardDelete}
-                cards={cards}
-                handleAddPlaceSubmit={handleAddPlaceSubmit}>
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
                   <Main
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+                    isAddPlacePopupOpen={isAddPlacePopupOpen}
+                    isEditProfilePopupOpen={isEditProfilePopupOpen}
+                    onCloseAll={closeAllPopups}
+                    onCardClick={handleCardClick}
+                    selectedCard={selectedCard}
+                    handleUpdateUser={handleUpdateUser}
+                    handleUpdateAvatar={handleUpdateAvatar}
+                    handleCardLike={handleCardLike}
+                    handleCardDelete={handleCardDelete}
+                    cards={cards}
+                    handleAddPlaceSubmit={handleAddPlaceSubmit}
                   />
                 </ProtectedRoute>
               }

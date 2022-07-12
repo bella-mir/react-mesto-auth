@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
-function Login({handleLogin}) {
+function Login({ handleLogin }) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,11 +13,10 @@ function Login({handleLogin}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let {email, password} =  data;
-    handleLogin(email, password)
-
+    let { email, password } = data;
+    handleLogin(email, password);
   };
-  
+
   return (
     <div className="register">
       <h2 className="register__title">Вход</h2>
@@ -49,9 +47,6 @@ function Login({handleLogin}) {
           </button>
         </div>
       </form>
-      <Link to="/sign-up" className="register__login-link">
-          Зарегестрироваться
-        </Link>
     </div>
   );
 }
