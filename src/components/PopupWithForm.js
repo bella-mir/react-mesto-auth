@@ -14,10 +14,9 @@ function PopupWithForm({
     >
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
-        <form id={`form_${name}`} name={name} className="form" novalidate onSubmit={onSubmit}>
+        <form id={`form_${name}`} name={name} className="form" noValidate onSubmit={onSubmit}>
           {children}
           <input
-            id="submit_avatar"
             className="form__submit"
             type="submit"
             value={buttonText}

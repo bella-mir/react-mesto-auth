@@ -1,9 +1,5 @@
 import React, { useContext } from "react";
-import ImagePopup from "./ImagePopup";
 import Card from "./Card";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
@@ -59,6 +55,7 @@ function Main(props) {
       <section className="places">
         {props.cards.map((card) => (
           <Card
+            key={card._id}
             card={card}
             onCardClick={props.onCardClick}
             onCardLike={props.handleCardLike}
@@ -67,25 +64,7 @@ function Main(props) {
         ))}
       </section>
 
-      <EditAvatarPopup
-        isOpen={props.isEditAvatarPopupOpen}
-        onClose={props.onCloseAll}
-        onUpdateAvatar={props.handleUpdateAvatar}
-      />
-
-      <EditProfilePopup
-        isOpen={props.isEditProfilePopupOpen}
-        onClose={props.onCloseAll}
-        onUpdateUser={props.handleUpdateUser}
-      />
-
-      <AddPlacePopup
-        isOpen={props.isAddPlacePopupOpen}
-        onClose={props.onCloseAll}
-        onAddCard={props.handleAddPlaceSubmit}
-      />
-
-      <ImagePopup card={props.selectedCard} onClose={props.onCloseAll} />
+      
     </main>
   );
 }

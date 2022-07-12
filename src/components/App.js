@@ -8,10 +8,14 @@ import Footer from "./Footer.js";
 import Register from "./Register";
 import Login from "./Login";
 import InfoTooltip from "./InfoTooltip";
+import EditAvatarPopup from "./EditAvatarPopup";
+import EditProfilePopup from "./EditProfilePopup";
+import ImagePopup from "./ImagePopup";
+import AddPlacePopup from "./AddPlacePopup";
 import ProtectedRoute from "./ProtectedRoute";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
-import * as auth from "../auth.js";
+import * as auth from "../utils/auth.js";
 
 function App() {
   const navigate = useNavigate();
@@ -61,6 +65,7 @@ function App() {
         .then((data) => {
           if (data) {
             setIsLoggedIn(true);
+            setEmail(data.data.email);
           }
         })
         .catch((err) => {
@@ -200,65 +205,75 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <body className="root">
-        <div className="page">
-          <Header
-            isloggedIn={isLoggedIn}
-            handleLogout={handleLogout}
-            email={email}
+      <div className="page">
+        <Header
+          isloggedIn={isLoggedIn}
+          handleLogout={handleLogout}
+          email={email}
+        />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Main
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onCardClick={handleCardClick}
+                  selectedCard={selectedCard}
+                  handleCardLike={handleCardLike}
+                  handleCardDelete={handleCardDelete}
+                  cards={cards}
+                />
+              </ProtectedRoute>
+            }
           />
 
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <Main
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-                    isAddPlacePopupOpen={isAddPlacePopupOpen}
-                    isEditProfilePopupOpen={isEditProfilePopupOpen}
-                    onCloseAll={closeAllPopups}
-                    onCardClick={handleCardClick}
-                    selectedCard={selectedCard}
-                    handleUpdateUser={handleUpdateUser}
-                    handleUpdateAvatar={handleUpdateAvatar}
-                    handleCardLike={handleCardLike}
-                    handleCardDelete={handleCardDelete}
-                    cards={cards}
-                    handleAddPlaceSubmit={handleAddPlaceSubmit}
-                  />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/sign-up"
-              element={<Register handleRegister={handleRegister} />}
-            />
-            <Route
-              path="/sign-in"
-              element={<Login handleLogin={handleLogin} />}
-            />
-            <Route
-              path="*"
-              element={
-                isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
-              }
-            />
-          </Routes>
-
-          <InfoTooltip
-            isCorrect={isRegisterSuccess}
-            onClose={closeAllPopups}
-            isOpen={registerInfo}
+          <Route
+            path="/sign-up"
+            element={<Register handleRegister={handleRegister} />}
           />
+          <Route
+            path="/sign-in"
+            element={<Login handleLogin={handleLogin} />}
+          />
+          <Route
+            path="*"
+            element={
+              isLoggedIn ? <Navigate to="/" /> : <Navigate to="/sign-in" />
+            }
+          />
+        </Routes>
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
-          <Footer />
-        </div>
-      </body>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddCard={handleAddPlaceSubmit}
+        />
+
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+        <InfoTooltip
+          isCorrect={isRegisterSuccess}
+          onClose={closeAllPopups}
+          isOpen={registerInfo}
+        />
+
+        <Footer />
+      </div>
     </CurrentUserContext.Provider>
   );
 }
