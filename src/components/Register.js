@@ -1,20 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "../hooks/useForm";
 
 function Register({ handleRegister }) {
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((oldData) => ({ ...oldData, [name]: value }));
-  };
+  const controlInput = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let { email, password } = data;
+    const { email, password } = controlInput.values;
     handleRegister(email, password);
   };
 
@@ -28,8 +21,8 @@ function Register({ handleRegister }) {
           name="email"
           type="email"
           placeholder="Email"
-          value={data.email}
-          onChange={handleChange}
+          value={controlInput?.values?.email || ""}
+          onChange={controlInput.handleChange}
         />
         <span className="form__error" id="email-error"></span>
         <input
@@ -38,8 +31,8 @@ function Register({ handleRegister }) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={data.password}
-          onChange={handleChange}
+          value={controlInput?.values?.password || ""}
+          onChange={controlInput.handleChange}
         />
         <span className="form__error" id="password-error"></span>
         <div className="register__button-container">

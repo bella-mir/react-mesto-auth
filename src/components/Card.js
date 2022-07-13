@@ -29,7 +29,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   }
 
   return (
-    <article className="place" key={card._id}>
+    <article className="place">
       <img
         className="place__image"
         alt={card.name}

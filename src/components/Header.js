@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
 function Header(props) {
   const [windowPath, setWindowPath] = useState(window.location.pathname);
@@ -11,24 +11,36 @@ function Header(props) {
   return (
     <header className="header">
       <div className="header__logo"></div>
-      <div>
-        {props.isloggedIn ? (
-          <div className="header__menu">
-            <div>{props.email}</div>{" "}
-            <button className="header__link" onClick={props.handleLogout}>
-              Выйти
-            </button>
-          </div>
-        ) : windowPath === "/sign-up" ? (
-          <Link to="/sign-in" className="header__link">
-            Войти
-          </Link>
-        ) : (
-          <Link to="/sign-up" className="header__link">
-            Регистрация
-          </Link>
-        )}
-      </div>
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <div className="header__menu">
+              <p className="header__user">{props.email}</p>
+              <button className="header__link" onClick={props.handleLogout}>
+                Выйти
+              </button>
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/sign-up"
+          element={
+            <Link className="header__link" to="/sign-in">
+              Войти
+            </Link>
+          }
+        ></Route>
+        <Route
+          path="/sign-in"
+          element={
+            <Link className="header__link" to="/sign-up">
+              Регистрация
+            </Link>
+          }
+        ></Route>
+      </Routes>
     </header>
   );
 }

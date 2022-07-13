@@ -5,7 +5,7 @@ function PopupWithForm({
   isOpen,
   children,
   buttonText = "Сохранить",
-  onSubmit
+  onSubmit,
 }) {
   return (
     <section
@@ -14,16 +14,16 @@ function PopupWithForm({
     >
       <div className="popup__container">
         <h2 className="popup__title">{title}</h2>
-        <form id={`form_${name}`} name={name} className="form" noValidate onSubmit={onSubmit}>
+        <form
+          id={`form_${name}`}
+          name={name}
+          className="form"
+          onSubmit={onSubmit}
+        >
           {children}
-          <input
-            className="form__submit"
-            type="submit"
-            value={buttonText}
-          />
+          <input className="form__submit" type="submit" value={buttonText} />
         </form>
         <button
-          id="popupAdClose"
           type="button"
           className="popup__close"
           onClick={onClose}
