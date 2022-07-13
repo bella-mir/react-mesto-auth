@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 import { useForm } from "../hooks/useForm";
 
@@ -7,16 +7,12 @@ function AddPlacePopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const {placeName, placeLink} = controlInput.values;
-    props.onAddCard({
-      name: placeName,
-      link: placeLink,
-    });
+    props.onAddCard(controlInput.values);
   }
 
   useEffect(() => {
     if (!props.isOpen) {
-     controlInput.setValues({});
+      controlInput.setValues({});
     }
   }, [props.isOpen]);
 
@@ -39,7 +35,7 @@ function AddPlacePopup(props) {
         minLength="2"
         maxLength="30"
         onChange={controlInput.handleChange}
-        value={controlInput?.values?.placeName || ''}
+        value={controlInput?.values?.name || ""}
       />
       <span className="form__error" id="name-error"></span>
       <input
@@ -50,7 +46,7 @@ function AddPlacePopup(props) {
         placeholder="Ссылка на картинку"
         required
         onChange={controlInput.handleChange}
-        value={controlInput?.values?.placeLink || ''}
+        value={controlInput?.values?.link || ""}
       />
       <span className="form__error" id="link-error"></span>
     </PopupWithForm>

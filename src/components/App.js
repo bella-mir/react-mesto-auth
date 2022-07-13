@@ -141,7 +141,7 @@ function App() {
       .deleteCard(card._id)
       .then(() => {
         setCards((cards) =>
-          cards.filter(function(e) {
+          cards.filter(function (e) {
             return e._id !== card._id;
           })
         );
@@ -179,22 +179,26 @@ function App() {
     setSelectedCards({});
   };
 
-  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link
+  const isOpen =
+    isEditAvatarPopupOpen ||
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    registerInfo ||
+    selectedCard.link;
 
   useEffect(() => {
     function closeByEscape(evt) {
-      if(evt.key === 'Escape') {
+      if (evt.key === "Escape") {
         closeAllPopups();
       }
     }
-    if(isOpen) {
-      document.addEventListener('keydown', closeByEscape);
+    if (isOpen) {
+      document.addEventListener("keydown", closeByEscape);
       return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
+        document.removeEventListener("keydown", closeByEscape);
+      };
     }
-  }, [isOpen]) 
-  
+  }, [isOpen]);
 
   const handleCardClick = (card) => {
     setSelectedCards(card);
