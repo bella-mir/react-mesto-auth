@@ -5,9 +5,9 @@
 
 ## Created as one of the [Yandex.Praktikum](https://praktikum.yandex.com/) Bootcamp projects
 
-The project is based on frontend part of [Mesto-React project](https://github.com/belka-mironova/mesto-react)
+The project is based on frontend part of [Mesto-React project](https://github.com/bella-mir/mesto-react)
 
-[Github Pages](https://belka-mironova.github.io/react-mesto-auth/)
+[Github Pages](https://bella-mir.github.io/react-mesto-auth/)
 
 **Description**
 
@@ -18,7 +18,7 @@ In this work  I've used React to make the page interactive, registration, author
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/belka-mironova/mesto-react-auth.git
+   git clone https://github.com/bella-mir/mesto-react-auth.git
    ```
 2. Install NPM packages
    ```sh
